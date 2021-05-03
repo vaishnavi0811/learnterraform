@@ -16,6 +16,6 @@ resource "azurerm_virtual_network" "samplevnet" {
 resource "azurerm_subnet" "example" {
     name = "subnet0"
     resource_group_name = "Learning"
-    virtual_network_name = azurerm_virtual_network.example.name
+    virtual_network_name = azurerm_virtual_network.samplevnet.name
     address_prefixes = ["10.0.1.0/24"]
 }
