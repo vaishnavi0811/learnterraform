@@ -63,14 +63,14 @@ resource "azurerm_subnet" "subnet0" {
 
 resource "azurerm_virtual_network_peering" "peer1" {
   name                      = "peer1to2"
-  resource_group_name       = azurerm_resource_group.example.name
+  resource_group_name       = azurerm_virtual_network.vnet.resource_group_name
   virtual_network_name      = azurerm_virtual_network.vnet.name
   remote_virtual_network_id = azurerm_virtual_network.vnet1.id
 }
 
 resource "azurerm_virtual_network_peering" "peer2" {
   name                      = "peer2to1"
-  resource_group_name       = azurerm_resource_group.example.name
+  resource_group_name       = azurerm_virtual_network.vnet.resource_group_name
   virtual_network_name      = azurerm_virtual_network.vnet1.name
   remote_virtual_network_id = azurerm_virtual_network.vnet.id
 }
