@@ -87,7 +87,7 @@ resource "azurerm_network_interface" "nic" {
   }
 }
 
-resource "azurerm_windows_virtual_machine" "VM" {
+resource "azurerm_windows_virtual_machine" "azurevm" {
   name                = "testvm"
   resource_group_name = azurerm_virtual_network.vnet.resource_group_name
   location            = azurerm_virtual_network.vnet.location
