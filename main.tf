@@ -74,3 +74,39 @@ resource "azurerm_virtual_network_peering" "peer2" {
   virtual_network_name      = azurerm_virtual_network.vnet1.name
   remote_virtual_network_id = azurerm_virtual_network.vnet.id
 }
+
+resource "azurerm_network_interface" "nic" {
+  name                = "NIC01"
+  location            = azurerm_virtual_network.vnet.location
+  resource_group_name = azurerm_virtual_network.vnet.resource_group_name
+
+  ip_configuration {
+    name                          = "testconfiguration1"
+    subnet_id                     = azurerm_subnet.subnet.id
+    private_ip_address_allocation = "Dynamic"
+  }
+}
+
+resource "azurerm_windows_virtual_machine" "VM" {
+  name                = "testvm"
+  resource_group_name = azurerm_virtual_network.vnet.resource_group_name
+  location            = azurerm_virtual_network.vnet.location
+  size                = "Standard_DS1_v2"
+  admin_username      = "adminuser"
+  admin_password      = "Password@2021"
+  network_interface_ids = [
+    azurerm_network_interface.nic.id
+  ]
+
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }
+
+  source_image_reference {
+    publisher = "MicrosoftWindowsServer"
+    offer     = "WindowsServer"
+    sku       = "2016-Datacenter"
+    version   = "latest"
+  }
+
