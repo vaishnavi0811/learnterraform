@@ -18,6 +18,7 @@ resource "azurerm_subnet" "subnet" {
     resource_group_name = "Learning"
     virtual_network_name = azurerm_virtual_network.vnet.name
     address_prefixes = ["20.0.1.0/24"]
+    depends_on = [azurerm_virtual_network.vnet,azurerm_network_security_group.azurensg]
 }
 
 resource "azurerm_network_security_group" "azurensg" {
@@ -59,6 +60,7 @@ resource "azurerm_subnet" "subnet0" {
     resource_group_name = azurerm_virtual_network.vnet.resource_group_name
     virtual_network_name = azurerm_virtual_network.vnet1.name
     address_prefixes = ["30.0.1.0/24"]
+    depends_on = [azurerm_virtual_network.vnet1]
 }
 
 resource "azurerm_virtual_network_peering" "peer1" {
@@ -79,6 +81,7 @@ resource "azurerm_network_interface" "nic" {
   name                = "NIC01"
   location            = azurerm_virtual_network.vnet.location
   resource_group_name = azurerm_virtual_network.vnet.resource_group_name
+  depends_on = [azurerm_virtual_network.vnet,azurerm_subnet.subnet]
 
   ip_configuration {
     name                          = "testconfiguration1"
@@ -97,6 +100,7 @@ resource "azurerm_windows_virtual_machine" "azurevm" {
   network_interface_ids = [
     azurerm_network_interface.nic.id
   ]
+  depends_on = [azurerm_network_interface.nic]
 
   os_disk {
     caching              = "ReadWrite"
