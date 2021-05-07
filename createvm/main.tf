@@ -1,4 +1,3 @@
-variable
 provider "azurerm" {
 	 features {}
 }
