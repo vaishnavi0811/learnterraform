@@ -9,7 +9,3 @@ module "vnet" {
 module "virtualmachine" {
     source = "./virtualmachine"
 }
-
-module "azurensg" {
-    source = "./azurensg"
-}
