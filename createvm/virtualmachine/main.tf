@@ -1,3 +1,13 @@
+variable "subnetid" {
+    type = string
+}
+variable "rsgname" {
+    type = string
+}
+variable "location" {
+    type = string
+}
+
 resource "azurerm_network_interface" "nic" {
   name                = "NIC01"
   location            = azurerm_virtual_network.vnet0.location
