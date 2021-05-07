@@ -1,9 +1,18 @@
+variable "subnetid" {
+    type = string
+}
+variable "rsgname" {
+    type = string
+}
+variable "location" {
+    type = string
+}
+
 resource "azurerm_network_interface" "nic" {
   name                = "NIC01"
   location            = azurerm_virtual_network.vnet0.location
   resource_group_name = azurerm_virtual_network.vnet0.resource_group_name
-  depends_on = [azurerm_virtual_network.vnet0,azurerm_subnet.subnet0]
-
+ 
   ip_configuration {
     name                          = "testconfiguration1"
     subnet_id                     = azurerm_subnet.subnet0.id

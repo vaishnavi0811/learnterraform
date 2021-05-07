@@ -39,3 +39,13 @@ resource "azurerm_subnet_network_security_group_association" "nsgassociate" {
   subnet_id = azurerm_subnet.subnet0.id
   network_security_group_id = azurerm_network_security_group.azurensg.id
 }
+
+output "subnetid" {
+    value = azurerm_subnet.subnet0.id
+}
+output "rsgname" {
+    value = azurerm_virtual_network.vnet0.resource_group_name
+}
+output "location" {
+    value = azurerm_virtual_network.vnet0.location
+}
