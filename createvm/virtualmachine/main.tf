@@ -10,21 +10,21 @@ variable "location" {
 
 resource "azurerm_network_interface" "nic" {
   name                = "NIC01"
-  location            = azurerm_virtual_network.vnet0.location
-  resource_group_name = azurerm_virtual_network.vnet0.resource_group_name
+  location            = var.location
+  resource_group_name = var.rsgname
   
 
   ip_configuration {
     name                          = "testconfiguration1"
-    subnet_id                     = azurerm_subnet.subnet0.id
+    subnet_id                     = var.subnetid
     private_ip_address_allocation = "Dynamic"
   }
 }
 
 resource "azurerm_windows_virtual_machine" "azurevm" {
   name                = "testvm"
-  resource_group_name = azurerm_virtual_network.vnet0.resource_group_name
-  location            = azurerm_virtual_network.vnet0.location
+  resource_group_name = var.rsgname
+  location            = var.location
   size                = "Standard_DS1_v2"
   admin_username      = "adminuser"
   admin_password      = "Password@2021"
