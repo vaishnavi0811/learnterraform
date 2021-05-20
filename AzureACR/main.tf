@@ -1,3 +1,7 @@
+provider "azurerm" {
+	 features {}
+}
+
 resource "azurerm_virtual_network" "example" {
   name                = "acrvnet"
   address_space       = ["10.0.0.0/16"]
