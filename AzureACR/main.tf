@@ -14,7 +14,6 @@ resource "azurerm_subnet" "storage" {
   resource_group_name                            = "Learning"
   virtual_network_name                           = azurerm_virtual_network.example.name
   address_prefix                                 = "10.0.1.0/24"
-  enforce_private_link_endpoint_network_policies = false
   service_endpoints                              = ["Microsoft.Storage"]
 }  
 
