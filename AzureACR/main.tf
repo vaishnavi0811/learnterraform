@@ -19,7 +19,7 @@ resource "azurerm_subnet" "storage" {
 }  
 
 resource "azurerm_storage_account" "example" {
-  name                     = "acrstorage"
+  name                     = "acrstorage001"
   resource_group_name       = "Learning"
   location                  = "South india"
   account_tier              = "Standard"
